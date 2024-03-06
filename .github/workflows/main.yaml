@@ -1,0 +1,22 @@
+name: Run Tests
+
+on: [push]
+
+jobs:
+  skip:
+    if: "!contains(github.event.head_commit.message, 'run-tests')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skipped Tests
+        run: |
+             echo "Skipped tests. To run them, include run-tests in your commit message." 
+             exit 1
+
+  build:
+    if: "contains(github.event.head_commit.message, 'run-tests')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Tests
+        run: make run_tests
