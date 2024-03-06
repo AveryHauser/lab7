@@ -36,7 +36,7 @@ class LList{
     public:
 		LList();
 		~LList();
-		//LList(const LList& other);
+		LList(const LList& source);
 
 		void add_item(int item);
 		void frontview()const;
